@@ -1,17 +1,106 @@
 body{
-    background-color: rgb(223, 193, 218);
-    text-align: center;
+:root {
+  --orange: #FF6B2B;
+  --orange-light: #FFE0CC; 
+  --yellow: #FFD166; 
+  --green: #06D6A0;
+  --cream: #FFFBF5; 
+  --dark: #1A1A2E; 
+  --gray: #6B7280; 
+  --shadow: 0 8px 32px rgba(255, 107, 43, 0.15);
 }
-h1{
-    color: rgb(234, 27, 213);
-    font-family: 'Courier New', Courier, monospace;
+
+.hero-tag {
+  background: var(--orange-light);
+  color: var(--orange);
 }
-h2{color: beige;
-font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;}
-h3{color: rgb(0, 0, 0);
-font-family: Arial, Helvetica, sans-serif;}
-img{
-    width: 900px;
-    height: 700px
-    object-fit:cover; 
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding: 5rem 2rem;
 }
+
+.hero-tag {
+  display: inline-block;
+  background: var(--orange-light);
+  color: var(--orange);
+  border-radius: 50px; 
+  padding: 0.4rem 1rem;
+}
+
+.nav-container {
+  display: flex; 
+  justify-content: space-between; 
+  height: 70px;
+}
+
+.ingredients-grid {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 1.5rem; 
+  justify-content: center; 
+}
+
+.ingredient-card {
+  transition: all 0.3s ease; 
+  overflow: hidden; 
+  position: relative;
+}
+
+.ingredient-card::before {
+  content: '';
+  background: var(--orange);
+  transform: translateY(100%); 
+  transition: transform 0.3s ease;
+}
+
+.ingredient-card:hover { transform: translateY(-8px); }
+.ingredient-card:hover::before { transform: translateY(0); }
+
+.nav-links a {
+  text-decoration: none; 
+  transition: color 0.3s;
+  position: relative; 
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  width: 0; 
+  height: 2px;
+  background: var(--orange);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--orange); }
+.nav-links a:hover::after { width: 100%; }
+
+let totalSeconds = 60 * 60; // 3600 secondes = 1 heure
+let remaining = totalSeconds;
+let interval = null; // stocke l'intervalle
+let running = false;
+
+function formatTime(s) {
+  const m = Math.floor(s / 60); // minutes entières
+  const sec = s % 60; // secondes restantes
+  return String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+}
+
+function startTimer() {
+  if (running) return; // évite plusieurs intervalles
+  running = true;
+  interval = setInterval(() => { // répète chaque 1000ms
+    if (remaining <= 0) {
+      clearInterval(interval); return;
+    }
+    remaining--; // enlève 1 seconde
+    updateDisplay();
+  }, 1000);
+}
+
+  document.getElementById('timerDisplay').textContent = formatTime(remaining);
+  const pct = (remaining / totalSeconds) * 100;
+  document.getElementById('timerBar').style.width = pct + '%';
