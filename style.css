@@ -219,9 +219,6 @@ p { font-size: 0.95rem; line-height: 1.85; color: var(--mid); font-weight: 300; 
   letter-spacing: 0.05em;
 }
 
-/* ===========================
-   OBJECTIFS
-=========================== */
 .objectifs {
   background: var(--black);
   padding: 7rem 4rem;
@@ -246,7 +243,7 @@ p { font-size: 0.95rem; line-height: 1.85; color: var(--mid); font-weight: 300; 
   flex-direction: column;
   gap: 1rem;
   padding: 2rem 1.5rem;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   transition: border-color var(--transition);
 }
 
